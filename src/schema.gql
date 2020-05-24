@@ -1,0 +1,129 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type PublicUserType {
+  _id: ID!
+  username: String!
+}
+
+type PostType {
+  _id: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  content: String!
+  ownerId: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type PostCreatedType {
+  user: PublicUserType!
+  post: PostType!
+}
+
+type PostCommentType {
+  _id: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  ownerId: String!
+  postId: String!
+  content: String!
+}
+
+type PrivateUserType {
+  _id: ID!
+  username: String!
+}
+
+type OnCommentMyPostsType {
+  user: PublicUserType!
+  post: PostType!
+}
+
+type SignUpType {
+  token: String!
+  user: PublicUserType!
+}
+
+type SignInType {
+  token: String!
+  user: PublicUserType!
+}
+
+type Query {
+  users: [PublicUserType!]!
+  user(data: GetOneInputType!): PublicUserType!
+  posts: [PostType!]!
+  post(id: String!): PostType!
+  postComments: [PostCommentType!]!
+  postComment(id: String!): PostCommentType!
+  me: PrivateUserType!
+}
+
+input GetOneInputType {
+  _id: String!
+}
+
+type Mutation {
+  createUser(data: CreateUserInputType!): PublicUserType!
+  updateUser(data: UpdateUserInputType!): PublicUserType!
+  deleteUser(id: String!): String!
+  createPost(data: CreatePostInputType!): PostType!
+  updatePost(data: UpdatePostInputType!, id: String!): PostType!
+  deletePost(id: String!): String!
+  createPostComment(data: CreatePostCommentInput!): PostCommentType!
+  updatePostComment(data: UpdatePostCommentInput!, id: String!): PostCommentType!
+  deletePostComment(id: String!): String!
+  signUp(data: SignUpInputType!): SignUpType!
+  signIn(data: SignInInputType!): SignInType!
+}
+
+input CreateUserInputType {
+  username: String!
+  password: String!
+}
+
+input UpdateUserInputType {
+  _id: ID!
+  username: String
+}
+
+input CreatePostInputType {
+  title: String!
+  content: String!
+}
+
+input UpdatePostInputType {
+  title: String
+  content: String
+}
+
+input CreatePostCommentInput {
+  postId: String!
+  content: String!
+}
+
+input UpdatePostCommentInput {
+  content: String
+}
+
+input SignUpInputType {
+  username: String!
+  password: String!
+}
+
+input SignInInputType {
+  username: String
+  password: String
+}
+
+type Subscription {
+  userCreated(token: String!): PublicUserType!
+  postCreated: PostCreatedType!
+  onCommentMyPosts(token: String!): OnCommentMyPostsType!
+}
