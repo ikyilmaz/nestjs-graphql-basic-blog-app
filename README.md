@@ -33,4 +33,4 @@ $ npm run start:prod
 ```
 
 ## GraphQL Playground
-> http://localhost:8080/graphql
+> http://localhost:3000/graphql
